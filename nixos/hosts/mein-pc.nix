@@ -27,6 +27,48 @@
   networking.networkmanager.enable = true;
 
   environment.systemPackages = with pkgs; [
-    vim git wget firefox
+    #Development
+    vscode
+    vim
+    nodejs
+    yarn
+    git
+    wget
+    docker
+    postman
+
+    #Design
+    inkscape
+    gimp
+    krita
+    kdePackages.kdenlive
+
+    #Browser
+    firefox
+    chromium
+    brave
+
+    # Gaming
+    vulkan-tools
+    steam
+    lutris
+    wine
+    retroarch
+    pcsx2
+    discord
+
+    # Tools
+    obs-studio
+    bitwarden-desktop
+    nextcloud-client
+    evolution
+    zsh
+    fish
+    vlc
+    mpv
+    htop
+    btop
+    kdePackages.kdeconnect-kde
+
   ];
 }
