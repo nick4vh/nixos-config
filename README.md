@@ -1,2 +1,2 @@
 # nixos-config
-My NixOS Confiuration
+My NixOS Configuration
