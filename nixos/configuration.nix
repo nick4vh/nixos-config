@@ -4,13 +4,16 @@
   imports = [
     ./hardware-configuration.nix
     ./hosts/mein-pc.nix
-    ./modules/nvidia.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.hostName = "mein-pc";
   time.timeZone = "Europe/Berlin";
+
+  i18n.supportedLocales = [ "de_DE.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
+  i18n.defaultLocale = "de_DE.UTF-8";
+  console.keyMap = "de";
 
   users.users.nick = {
     isNormalUser = true;

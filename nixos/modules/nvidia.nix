@@ -2,7 +2,7 @@
 
 {
   # Aktiviert OpenGL für NVIDIA-Grafik
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
   };
 
