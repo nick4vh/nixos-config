@@ -93,5 +93,50 @@
     };
   };
 
+  # Deaktiviert das Wiederherstellen der letzten Sitzung
+  home.file.".config/ksmserverrc".text = ''
+    [General]
+    loginMode=emptySession
+  '';
+
+  # Autostart-Einträge
+  xdg.configFile = {
+    "autostart/spotify.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Exec=spotify
+      Hidden=false
+      X-GNOME-Autostart-enabled=true
+      Name=Spotify
+    '';
+
+    "autostart/discord.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Exec=discord
+      Hidden=false
+      X-GNOME-Autostart-enabled=true
+      Name=Discord
+    '';
+
+    "autostart/firefox.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Exec=firefox
+      Hidden=false
+      X-GNOME-Autostart-enabled=true
+      Name=Firefox
+    '';
+
+    "autostart/nextcloud-client.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Exec=nextcloud-client
+      Hidden=false
+      X-GNOME-Autostart-enabled=true
+      Name=Nextcloud
+    '';
+  };
+
   home.stateVersion = "24.05";
 }
