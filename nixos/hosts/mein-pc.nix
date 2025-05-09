@@ -30,6 +30,7 @@
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+  networking.firewall.enable = true;
 
   networking.networkmanager.enable = true;
 
@@ -51,6 +52,7 @@
     htop
     btop
     kdePackages.kdeconnect-kde
+    clamav #Antivirenschutz
   ];
 
   #Performance-Optimierungen

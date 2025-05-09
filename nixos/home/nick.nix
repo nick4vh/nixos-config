@@ -61,6 +61,7 @@
     btop
     neofetch
     fastfetch
+    clamav #Antivirenschutz
   ];
 
 
