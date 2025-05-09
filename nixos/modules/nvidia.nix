@@ -8,7 +8,7 @@
 
   # NVIDIA-Treiber aktivieren
   hardware.nvidia = {
-    open = true;  # Falls du neuere NVIDIA-Karten hast (z.B. RTX/GTX 16xx)
+    #open = true;  # Falls du neuere NVIDIA-Karten hast (z.B. RTX/GTX 16xx)
     modesetting.enable = true;
     package = pkgs.linuxPackages.nvidiaPackages.latest;  # Benutze die neueste Version
     powerManagement.enable = true;

@@ -17,6 +17,8 @@
     modesetting.enable = true;
     powerManagement.enable = true;
     package = config.boot.kernelPackages.nvidiaPackages.latest;
+    open = false;
+    nvidiaSettings = true;
   };
 
   services.pipewire = {
@@ -50,4 +52,56 @@
     btop
     kdePackages.kdeconnect-kde
   ];
+
+  #Performance-Optimierungen
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10;
+    "vm.dirty_ratio" = 15;
+    "vm.dirty_background_ratio" = 5;
+    "kernel.nmi_watchdog" = 0;
+  };
+
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
+  systemd.extraConfig = ''
+    DefaultTimeoutStartSec=5s
+    DefaultTimeoutStopSec=5s
+  '';
+
+  systemd.services."NetworkManager-wait-online".enable = false;
+
+  services.journald.extraConfig = ''
+    SystemMaxUse=200M
+    RuntimeMaxUse=100M
+  '';
+
+  hardware.opengl = {
+    enable = true;
+  };
+
+  # Schnellerer Boot mit systemd-boot
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.timeout = 0;
+
+  #Automatische Aufräumdienste
+  systemd.timers."nix-gc" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "weekly";
+      Persistent = true;
+    };
+  };
+
+  systemd.services."nix-gc" = {
+    script = ''
+      nix-collect-garbage -d
+      journalctl --vacuum-time=7d
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+    };
+  };
 }

@@ -31,6 +31,7 @@
     enable = true;
     version = 2;
     device = "/dev/sda"; # Wichtig: Nicht sda1 oder sda2, sondern die ganze Disk
+    timeout = 5;
   };
   boot.loader.efi = {
     canTouchEfiVariables = false; # sicherheitshalber

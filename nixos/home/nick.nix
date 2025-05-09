@@ -47,6 +47,7 @@
     # Tools
     obs-studio
     bitwarden-desktop
+    joplin
     nextcloud-client
     evolution
     zsh
@@ -55,6 +56,7 @@
     spotify
     kdePackages.kdeconnect-kde
     mpv
+    alacritty
     htop
     btop
     neofetch
@@ -70,9 +72,10 @@
       enable = true;
       defaultApplications = {
         # Standardanwendungen setzen
-        "text/plain" = "kate.desktop";
+        "text/plain" = "vscodium.desktop";
         "text/html" = "firefox.desktop";
         "text/nix" = "vscodium.desktop";
+        "application/x-nix" = "vscodium.desktop";
         "text/js" = "vscodium.desktop";
         "text/css" = "vscodium.desktop";
         "text/php" = "vscodium.desktop";
