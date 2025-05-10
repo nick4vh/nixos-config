@@ -31,7 +31,7 @@
             home-manager.useUserPackages = true;
             home-manager.users.nick = import ./nixos/home/nick.nix;
 
-            home-manager.backupFileExtension = "backup";
+            home-manager.backupFileExtension = "bak";
           }
         ];
       };

@@ -171,13 +171,15 @@
 
   # Fonts
   fonts.fontconfig.enable = true;
+
+  programs.plasma6.iconTheme = "Tela-dark";
 /*
-  # GTK-Themes (wird auch von einigen KDE-Anwendungen verwendet)
   gtk = {
     enable = true;
-    theme.name = "Breeze"; # Oder z. B. "Adwaita-dark"
-    iconTheme.name = "Tela-dark";
-    font.name = "Noto Sans";
+    iconTheme = {
+      package = pkgs.tela-icon-theme;
+      name = "Tela-dark";
+    };
   };
 
   # KDE spezifische Konfigs
