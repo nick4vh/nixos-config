@@ -4,6 +4,7 @@
 
   imports = [
     ../modules/nvidia.nix
+    #../modules/stylix-settings.nix
   ];
 
   services.xserver = {
@@ -53,6 +54,13 @@
     btop
     kdePackages.kdeconnect-kde
     clamav #Antivirenschutz
+
+   # Stylix
+    jetbrains-mono
+    inter
+    noto-fonts
+    tela-icon-theme
+    bibata-cursors
   ];
 
   #Performance-Optimierungen
