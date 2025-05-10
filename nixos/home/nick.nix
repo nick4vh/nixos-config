@@ -9,7 +9,7 @@
   LC_ALL = "de_DE.UTF-8";
   };
 
-  programs.home-manager.enable = true;
+  home.stateVersion = "24.05";
 
   programs.zsh.enable = true;
   home.packages = with pkgs; [
@@ -63,6 +63,25 @@
     neofetch
     fastfetch
     clamav #Antivirenschutz
+
+    # KVM
+    virt-manager      # GUI zur Verwaltung von VMs
+    virt-viewer       # Anzeige-Tool für VMs
+    qemu              # Virtualisierung
+    libvirt           # Virtualisierungs-Backend
+    dnsmasq           # DHCP für virtuelle Netzwerke
+    bridge-utils      # Netzwerk-Bridge Support
+    spice-gtk         # SPICE Support (grafische Darstellung)
+
+    # KDE Theme
+    # Schriftarten
+    noto-fonts
+    noto-fonts-emoji
+    noto-fonts-cjk-sans
+    nerd-fonts.fira-code
+
+    # Icon-Theme
+    tela-icon-theme
   ];
 
 
@@ -139,52 +158,46 @@
     '';
   };
 
-  home.stateVersion = "24.05";
+  #Theme Settings
 
-  #Stylix Settings
-  stylix = {
-    enable = true;
-
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-medium.yaml";
-
-    fonts = {
-      monospace = {
-        package = pkgs.nerd-fonts.fira-code;
-        name = "FiraCode Nerd Font";
-      };
-
-      sansSerif = {
-        package = pkgs.noto-fonts;
-        name = "Noto Sans";
-      };
-
-      serif = {
-        package = pkgs.noto-fonts;
-        name = "Noto Serif";
-      };
-
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
-      };
-    };
-
-
-    #image = wallpaper;
-
-    iconTheme = {
-      enable = true;
-      package = pkgs.tela-circle-icon-theme;
-      light = "Tela-circle-light";
-      dark = "Tela-circle-dark";
-    };
-
-    cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
-      size = 24;
-    };
-
-    #targets.plasma.enable = true;
+  # Cursor
+  home.pointerCursor = {
+    name = "Bibata-Modern-Ice";
+    package = pkgs.bibata-cursors;
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
   };
+
+  # Fonts
+  fonts.fontconfig.enable = true;
+/*
+  # GTK-Themes (wird auch von einigen KDE-Anwendungen verwendet)
+  gtk = {
+    enable = true;
+    theme.name = "Breeze"; # Oder z. B. "Adwaita-dark"
+    iconTheme.name = "Tela-dark";
+    font.name = "Noto Sans";
+  };
+
+  # KDE spezifische Konfigs
+  xdg.configFile."kdeglobals".text = ''
+    [General]
+    fixed = FiraCode Nerd Font,11
+    font = Noto Sans,10,-1,5,50,0,0,0,0,0
+
+    [Icons]
+    Theme=Tela-dark
+
+    [WM]
+    activeFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+  '';
+*/
+  # App Settings
+  programs.git = {
+    enable = true;
+    userName = "nick4vh";
+    userEmail = "nick@viereggeheyng.de";
+  };
+
 }

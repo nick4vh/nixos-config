@@ -6,10 +6,10 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    stylix.url = "github:danth/stylix";
+    #stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs:
     let
       system = "x86_64-linux";
     in {
@@ -20,7 +20,7 @@
 
         modules = [
           ./nixos/configuration.nix
-          stylix.nixosModules.stylix
+          #stylix.nixosModules.stylix
 
           nixos-hardware.nixosModules.common-cpu-intel
           nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
@@ -29,8 +29,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
             home-manager.users.nick = import ./nixos/home/nick.nix;
+
+            home-manager.backupFileExtension = "backup";
           }
         ];
       };

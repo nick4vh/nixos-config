@@ -31,7 +31,13 @@
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+
+  virtualisation.libvirtd.enable = true;
+  boot.kernelModules = [ "kvm-intel" ];
+  users.users.nick.extraGroups = [ "libvirtd" "kvm" ];
+
   networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [ 5900 5901 ]; # für SPICE ggf. nötig
 
   networking.networkmanager.enable = true;
 
