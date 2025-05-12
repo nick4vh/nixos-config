@@ -64,6 +64,9 @@
     fastfetch
     clamav #Antivirenschutz
 
+    #ChatAI
+    kdePackages.qtwebengine
+
     # KVM
     virt-manager      # GUI zur Verwaltung von VMs
     virt-viewer       # Anzeige-Tool für VMs
@@ -213,5 +216,39 @@
     userName = "nick4vh";
     userEmail = "nick@viereggeheyng.de";
   };
+
+/*
+  programs.firefox = {
+    enable = true;
+
+    # Profile definieren
+    profiles.default = {
+      id = 0;
+      isDefault = true;
+
+      # Erweiterungen (Add-ons)
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        ublock-origin
+        darkreader
+      ];
+
+      # Einstellungen (prefs.js)
+      settings = {
+        "browser.startup.page" = 3;  # 3 bedeutet "Letzte Sitzung"
+        "browser.startup.homepage" = "about:home";
+        "browser.search.defaultenginename" = "Ecosia";  # Ecosia als Standard-Suchmaschine
+        "privacy.resistFingerprinting" = true;
+        "privacy.trackingprotection.enabled" = true;
+        "browser.tabs.warnOnClose" = false;
+
+        # Deaktivieren von Telemetrie und Firefox-Konten
+        "datareporting.healthreport.uploadEnabled" = false;
+        "app.shield.optoutstudies.enabled" = false;
+        "browser.ping-centre.telemetry" = false;
+        "services.sync.enabled" = false;
+      };
+    };
+  };
+*/
 
 }
