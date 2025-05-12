@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home.username = "nick";
@@ -148,53 +148,65 @@
       Name=Firefox
     '';
 
-    "autostart/nextcloud-client.desktop".text = ''
+    "autostart/nextcloud.desktop".text = ''
       [Desktop Entry]
       Type=Application
-      Exec=nextcloud-client
+      Exec=nextcloud
       Hidden=false
       X-GNOME-Autostart-enabled=true
       Name=Nextcloud
     '';
   };
 
-  #Theme Settings
-
-  # Cursor
-  home.pointerCursor = {
-    name = "Bibata-Modern-Ice";
-    package = pkgs.bibata-cursors;
-    size = 24;
-    gtk.enable = true;
-    x11.enable = true;
-  };
-
+  # Theme Settings
   # Fonts
-  fonts.fontconfig.enable = true;
-
-  programs.plasma6.iconTheme = "Tela-dark";
+  #fonts.fontconfig.enable = true;
 /*
-  gtk = {
-    enable = true;
-    iconTheme = {
-      package = pkgs.tela-icon-theme;
-      name = "Tela-dark";
-    };
-  };
-
   # KDE spezifische Konfigs
   xdg.configFile."kdeglobals".text = ''
     [General]
-    fixed = FiraCode Nerd Font,11
-    font = Noto Sans,10,-1,5,50,0,0,0,0,0
+    ColorScheme=BreezeDark
 
     [Icons]
     Theme=Tela-dark
 
+    [KDE]
+    LookAndFeelPackage=org.kde.breezedark
+
+    [CursorTheme]
+    name=Bibata-Modern-Ice
+
     [WM]
-    activeFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+    LookAndFeelPackage=org.kde.breezedark
+  '';
+
+  xdg.configFile."plasmarc".text = ''
+    [Theme]
+    name=BreezeDark
+  '';
+
+  xdg.configFile."kdeglobals".force = true;
+  xdg.configFile."plasmarc".force = true;
+
+  xdg.configFile."kcminputrc".text = ''
+    [Mouse]
+    cursorTheme=Bibata-Modern-Ice
   '';
 */
+/*
+  home.activation.setWallpaper = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    # Nur qdbus, ohne plasmashell --replace!
+    ${pkgs.kdePackages.qttools}/bin/qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript '
+    var allDesktops = desktops();
+    for (i=0;i<allDesktops.length;i++) {
+      d = allDesktops[i];
+      d.wallpaperPlugin = "org.kde.image";
+      d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");
+      d.writeConfig("Image", "file:/wallpaper/nixos_wallpaper_1920-1080.jpg");
+     }'
+  '';
+*/
+
   # App Settings
   programs.git = {
     enable = true;
