@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -13,7 +13,7 @@
 
   i18n.supportedLocales = [ "de_DE.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
   i18n.defaultLocale = "de_DE.UTF-8";
-  console.keyMap = "de";
+  console.keyMap = lib.mkForce "de";
 
   users.users.nick = {
     isNormalUser = true;

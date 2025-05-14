@@ -7,6 +7,7 @@
   home.sessionVariables = {
   LANG = "de_DE.UTF-8";
   LC_ALL = "de_DE.UTF-8";
+  STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\\\${HOME}/.steam/root/compatibilitytools.d";
   };
 
   home.stateVersion = "24.05";
@@ -38,6 +39,7 @@
     # Gaming
     vulkan-tools
     steam
+    protonup
     lutris
     wine
     retroarch

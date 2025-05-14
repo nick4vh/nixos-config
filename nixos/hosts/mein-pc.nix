@@ -1,19 +1,27 @@
 { config, pkgs, ... }:
 
 {
-
   imports = [
     ../modules/nvidia.nix
-    #../modules/stylix-settings.nix
+    # ../modules/stylix-settings.nix
   ];
 
   services.xserver = {
     enable = true;
-    desktopManager.plasma6.enable = true;
-    displayManager.sddm.enable = true;
-    xkb.layout = "de";
+    layout = "de";
+    xkbVariant = ""; # optional – du kannst z. B. "nodeadkeys" setzen
   };
 
+  services.desktopManager.plasma6.enable = true;
+
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true; #  Explizit SDDM im Wayland-Modus
+  };
+
+  console.useXkbConfig = true;
+
+  # NVIDIA Wayland-Kompatibilität
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -37,39 +45,24 @@
   users.users.nick.extraGroups = [ "libvirtd" "kvm" ];
 
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 5900 5901 ]; # für SPICE ggf. nötig
+  networking.firewall.allowedTCPPorts = [ 5900 5901 ];
 
   networking.networkmanager.enable = true;
 
   environment.systemPackages = with pkgs; [
-    #Development
-    vscodium
-    vim
-    nodejs
-    yarn
-    git
-    wget
+    # Development
+    vscodium vim nodejs yarn git wget
 
-    #Browser
-    firefox
-    chromium
-    brave
+    # Browser
+    firefox chromium brave
 
     # Tools
-    htop
-    btop
-    kdePackages.kdeconnect-kde
-    clamav #Antivirenschutz
+    htop btop kdePackages.kdeconnect-kde clamav
 
-   # Stylix
-    jetbrains-mono
-    inter
-    noto-fonts
-    tela-icon-theme
-    bibata-cursors
+    # Themes / Icons
+    jetbrains-mono inter noto-fonts tela-icon-theme bibata-cursors
   ];
 
-  #Performance-Optimierungen
   boot.kernel.sysctl = {
     "vm.swappiness" = 10;
     "vm.dirty_ratio" = 15;
@@ -94,15 +87,8 @@
     RuntimeMaxUse=100M
   '';
 
-  hardware.opengl = {
-    enable = true;
-  };
+  hardware.opengl.enable = true;
 
-  # Schnellerer Boot mit systemd-boot
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.timeout = 0;
-
-  #Automatische Aufräumdienste
   systemd.timers."nix-gc" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
@@ -116,8 +102,6 @@
       nix-collect-garbage -d
       journalctl --vacuum-time=7d
     '';
-    serviceConfig = {
-      Type = "oneshot";
-    };
+    serviceConfig.Type = "oneshot";
   };
 }
